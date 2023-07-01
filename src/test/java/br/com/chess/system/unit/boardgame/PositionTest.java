@@ -1,4 +1,4 @@
-package unit.boardgame;
+package br.com.chess.system.unit.boardgame;
 
 import br.com.chess.system.boardgame.Position;
 import org.junit.jupiter.api.Test;
