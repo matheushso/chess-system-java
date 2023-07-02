@@ -4,27 +4,35 @@ import br.com.chess.system.chess.ChessPiece;
 
 public class UI {
 
-    public static void printBoard(ChessPiece[][] pieces) {
+    public static StringBuilder printBoard(ChessPiece[][] pieces) {
+        StringBuilder board = new StringBuilder();
+
         for (int i=0; i < pieces.length; i++) {
-            System.out.print((8 - i) + " ");
+            board.append((8 - i) + " ");
 
             for (int j=0; j < pieces.length; j++) {
-                printPiece(pieces[i][j]);
+                board.append(printPiece(pieces[i][j]));
             }
 
-            System.out.println();
+            board.append('\n');
         }
 
-        System.out.println("  a b c d e f g h");
+        board.append("  a b c d e f g h");
+
+        return board;
     }
 
-    private static void printPiece(ChessPiece piece) {
+    private static StringBuilder printPiece(ChessPiece piece) {
+        StringBuilder boardPiece = new StringBuilder();
+
         if (piece == null) {
-            System.out.print("-");
+            boardPiece.append("-");
         } else {
-            System.out.print(piece);
+            boardPiece.append(piece);
         }
 
-        System.out.print(" ");
+        boardPiece.append(" ");
+
+        return boardPiece;
     }
 }
