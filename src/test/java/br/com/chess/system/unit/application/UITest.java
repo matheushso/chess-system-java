@@ -13,14 +13,14 @@ public class UITest {
     @Test
     public void getPieces_shouldReturnBoardWithPieces() {
         StringBuilder boardChess = new StringBuilder();
-        boardChess.append("8 - - - - - - - - \n" +
+        boardChess.append("8 - - - - K - - - \n" +
                           "7 - - - - - - - - \n" +
-                          "6 - - - - - - - - \n" +
+                          "6 - R - - - - - - \n" +
                           "5 - - - - - - - - \n" +
                           "4 - - - - - - - - \n" +
                           "3 - - - - - - - - \n" +
                           "2 - - - - - - - - \n" +
-                          "1 - - - - - - - - \n" +
+                          "1 - - - - K - - - \n" +
                           "  a b c d e f g h");
 
         assertEquals(boardChess.toString(), UI.printBoard(chessMatch.getPieces()).toString());

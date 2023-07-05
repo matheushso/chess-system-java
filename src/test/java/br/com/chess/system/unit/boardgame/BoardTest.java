@@ -15,19 +15,7 @@ public class BoardTest {
     }
 
     @Test
-    public void setRow_shouldModifyRow() {
-        board.setRows(5);
-        assertEquals(5, board.getRows());
-    }
-
-    @Test
     public void getColumn_shouldReturnColumn() {
         assertEquals(5, board.getColumns());
-    }
-
-    @Test
-    public void setColumn_shouldModifyColumn() {
-        board.setColumns(7);
-        assertEquals(7, board.getColumns());
     }
 }
