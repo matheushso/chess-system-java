@@ -3,7 +3,6 @@ package br.com.chess.system.application;
 import br.com.chess.system.chess.ChessPiece;
 import br.com.chess.system.chess.ChessPosition;
 import br.com.chess.system.chess.Color;
-
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
