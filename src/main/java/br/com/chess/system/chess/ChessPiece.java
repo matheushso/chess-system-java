@@ -3,7 +3,7 @@ package br.com.chess.system.chess;
 import br.com.chess.system.boardgame.Board;
 import br.com.chess.system.boardgame.Piece;
 
-public class ChessPiece extends Piece {
+public abstract class ChessPiece extends Piece {
 
     private Color color;
 
