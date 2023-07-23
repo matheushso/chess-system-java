@@ -48,10 +48,11 @@ public class UI {
         StringBuilder board = new StringBuilder();
 
         for (int i = 0; i < pieces.length; i++) {
-            board.append((8 - i) + " ");
+            board.append((8 - i))
+                    .append(" ");
 
             for (int j = 0; j < pieces.length; j++) {
-                board.append(printPiece(pieces[i][j]));
+                board.append(printPiece(pieces[i][j], false));
             }
 
             board.append('\n');
@@ -62,16 +63,42 @@ public class UI {
         return board;
     }
 
-    private static StringBuilder printPiece(ChessPiece piece) {
+    public static StringBuilder printBoard(ChessPiece[][] pieces, boolean[][] possibleMoves) {
+        StringBuilder board = new StringBuilder();
+
+        for (int i = 0; i < pieces.length; i++) {
+            board.append((8 - i))
+                    .append(" ");
+
+            for (int j = 0; j < pieces.length; j++) {
+                board.append(printPiece(pieces[i][j], possibleMoves[i][j]));
+            }
+
+            board.append('\n');
+        }
+
+        board.append("  a b c d e f g h");
+
+        return board;
+    }
+
+    private static StringBuilder printPiece(ChessPiece piece, boolean background) {
         StringBuilder boardPiece = new StringBuilder();
 
+        if (background) {
+            boardPiece.append(ANSI_BLUE_BACKGROUND);
+        }
+
         if (piece == null) {
-            boardPiece.append("-");
+            boardPiece.append("-" + ANSI_RESET);
         } else {
             if (piece.getColor() == Color.WHITE) {
-                boardPiece.append(piece);
+                boardPiece.append(piece)
+                        .append(ANSI_RESET);
             } else {
-                boardPiece.append(ANSI_YELLOW + piece + ANSI_RESET);
+                boardPiece.append(ANSI_YELLOW)
+                        .append(piece)
+                        .append(ANSI_RESET);
             }
         }
         boardPiece.append(" ");
