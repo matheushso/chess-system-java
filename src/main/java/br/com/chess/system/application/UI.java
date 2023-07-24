@@ -1,8 +1,10 @@
 package br.com.chess.system.application;
 
+import br.com.chess.system.chess.ChessMatch;
 import br.com.chess.system.chess.ChessPiece;
 import br.com.chess.system.chess.ChessPosition;
 import br.com.chess.system.chess.Color;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -42,6 +44,21 @@ public class UI {
         } catch (RuntimeException e) {
             throw new InputMismatchException("Error reading chess position. Valid values are from a1 to h8.");
         }
+    }
+
+    public static StringBuilder printMatch(ChessMatch chessMatch) {
+        StringBuilder match = new StringBuilder();
+
+        match.append(printBoard(chessMatch.getPieces()))
+                .append('\n')
+                .append('\n')
+                .append("Turn : ")
+                .append(chessMatch.getTurn())
+                .append('\n')
+                .append("Waiting player: ")
+                .append(chessMatch.getCurrentPlayer());
+
+        return match;
     }
 
     public static StringBuilder printBoard(ChessPiece[][] pieces) {
