@@ -5,8 +5,11 @@ import br.com.chess.system.chess.ChessPiece;
 import br.com.chess.system.chess.ChessPosition;
 import br.com.chess.system.chess.Color;
 
+import java.util.Arrays;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class UI {
 
@@ -46,10 +49,13 @@ public class UI {
         }
     }
 
-    public static StringBuilder printMatch(ChessMatch chessMatch) {
+    public static StringBuilder printMatch(ChessMatch chessMatch, List<ChessPiece> captured) {
         StringBuilder match = new StringBuilder();
 
         match.append(printBoard(chessMatch.getPieces()))
+                .append('\n')
+                .append('\n')
+                .append(printCapturedPieces(captured))
                 .append('\n')
                 .append('\n')
                 .append("Turn : ")
@@ -110,7 +116,8 @@ public class UI {
             boardPiece.append("-" + ANSI_RESET);
         } else {
             if (piece.getColor() == Color.WHITE) {
-                boardPiece.append(piece)
+                boardPiece.append(ANSI_WHITE)
+                        .append(piece)
                         .append(ANSI_RESET);
             } else {
                 boardPiece.append(ANSI_YELLOW)
@@ -121,5 +128,25 @@ public class UI {
         boardPiece.append(" ");
 
         return boardPiece;
+    }
+
+    private static StringBuilder printCapturedPieces(List<ChessPiece> captured) {
+        StringBuilder capturedPieces = new StringBuilder();
+        List<ChessPiece> white = captured.stream().filter(piece -> piece.getColor() == Color.WHITE).collect(Collectors.toList());
+        List<ChessPiece> black = captured.stream().filter(piece -> piece.getColor() == Color.BLACK).collect(Collectors.toList());
+
+        capturedPieces.append("Captured pieces:")
+                .append("\n")
+                .append("White: ")
+                .append(ANSI_WHITE)
+                .append(Arrays.toString(white.toArray()))
+                .append(ANSI_RESET)
+                .append("\n")
+                .append("Black: ")
+                .append(ANSI_YELLOW)
+                .append(Arrays.toString(black.toArray()))
+                .append(ANSI_RESET);
+
+        return capturedPieces;
     }
 }
