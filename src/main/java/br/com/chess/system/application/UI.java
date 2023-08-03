@@ -64,6 +64,12 @@ public class UI {
                 .append("Waiting player: ")
                 .append(chessMatch.getCurrentPlayer());
 
+        if (chessMatch.isCheck()) {
+            match.append('\n')
+                    .append("CHECK!")
+                    .append('\n');
+        }
+
         return match;
     }
 
