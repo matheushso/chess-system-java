@@ -32,9 +32,13 @@ public class UI {
     public static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
     public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
 
-    public static void clearScreen() {
-        System.out.print("\033[H\033[2J");
+    public static StringBuilder clearScreen() {
+        StringBuilder clear = new StringBuilder();
+
+        clear.append("\033[H\033[2J");
         System.out.flush();
+
+        return clear;
     }
 
     public static ChessPosition readChessPosition(Scanner sc) {
@@ -59,15 +63,24 @@ public class UI {
                 .append('\n')
                 .append('\n')
                 .append("Turn : ")
-                .append(chessMatch.getTurn())
-                .append('\n')
-                .append("Waiting player: ")
-                .append(chessMatch.getCurrentPlayer());
+                .append(chessMatch.getTurn());
 
-        if (chessMatch.isCheck()) {
+        if (!chessMatch.isCheckMate()) {
             match.append('\n')
-                    .append("CHECK!")
-                    .append('\n');
+                    .append("Waiting player: ")
+                    .append(chessMatch.getCurrentPlayer());
+
+            if (chessMatch.isCheck()) {
+                match.append('\n')
+                        .append("CHECK!")
+                        .append('\n');
+            }
+        } else {
+            match.append('\n')
+                    .append("CHECKMATE!")
+                    .append("\n")
+                    .append("Winner: ")
+                    .append(chessMatch.getCurrentPlayer());
         }
 
         return match;
