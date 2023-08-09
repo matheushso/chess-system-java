@@ -71,13 +71,12 @@ public class ChessMatch {
         Position target = targetPosition.toPosition();
 
         validateSourcePosition(source);
-        validadeTargetPosition(source, target);
-
+        validateTargetPosition(source, target);
         Piece capturedPiece = makeMove(source, target);
 
         if (testCheck(currentPlayer)) {
             undoMove(source, target, capturedPiece);
-            throw new ChessException("You can´t put yourself in check");
+            throw new ChessException("You can't put yourself in check");
         }
 
         ChessPiece movedPiece = (ChessPiece)board.piece(target);
@@ -206,12 +205,11 @@ public class ChessMatch {
         if (!board.piece(position).isThereAnyPossibleMove()) {
             throw new ChessException("There is no possible moves for the chosen piece.");
         }
-
     }
 
-    private void validadeTargetPosition(Position source, Position target) {
+    private void validateTargetPosition(Position source, Position target) {
         if (!board.piece(source).possibleMove(target)) {
-            throw new ChessException("There chosen piece can´t move to target position.");
+            throw new ChessException("The chosen piece can't move to target position.");
         }
     }
 
@@ -221,7 +219,7 @@ public class ChessMatch {
     }
 
     private Color opponent(Color color) {
-        return (color ==  Color.WHITE ? Color.BLACK : Color.WHITE);
+        return (color == Color.WHITE) ? Color.BLACK : Color.WHITE;
     }
 
     private ChessPiece king(Color color) {
@@ -275,7 +273,6 @@ public class ChessMatch {
                     }
                 }
             }
-
         }
 
         return true;
